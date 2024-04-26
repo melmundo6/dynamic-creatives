@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="main.js"></script>
+        <style>
+            .general {
+                position: absolute;
+                width: 33.39px;
+                height: 41.36px;
+                font-weight: bold;
+                text-align: center;
+                color: rgb(7, 7, 7);
+                top: 456px;
+                font-size: 56px;
+            }     
+        </style>
+    </head>
+    <body>
+        
+
+        <img src="../img/840x600.png">
+        <div class="general" id="hour1" style="left: 48px;"></div>
+        <div class="general" id="hour2" style="left: 108px;"></div>
+        <div class="general" id="min1" style="left: 185px;"></div>
+        <div class="general" id="min2" style="left: 240px;"></div>
+        <div class="general" id="seg1" style="left: 317px;"></div>
+        <div class="general" id="seg2" style="left: 375px;"></div>
+
+        <div id="countdown"></div>
+
+        <h2>Selecciona la fecha que deseas cronometrar</h2>
+        <input type="datetime-local" id="dateInput">
+        <button id="setDateButton" >Set Date</button>
+
+        <script>
+            $(document).ready(function() {
+                const hourElements = ['#hour1', '#hour2'];
+                const minElements  = ['#min1', '#min2'];
+                const segElements  = ['#seg1', '#seg2'];
+        
+                // Función para actualizar el contador
+                function updateCountdown(targetDate) {
+                    $('#countdown').countdown(targetDate, function(event) {
+                        let days = event.strftime('%D') * 24;
+                        let totalHours = parseInt(days) + parseInt(event.strftime('%H'));
+                        updateCounterElements(hourElements, totalHours.toString().padStart(2, '0'));
+                        updateCounterElements(minElements, event.strftime('%M'));
+                        updateCounterElements(segElements, event.strftime('%S'));
+                    });
+                }
+        
+                // Función para actualizar los elementos del contador
+                function updateCounterElements(elements, value) {
+                    elements.forEach(function(element, index) {
+                        $(element).html(value.charAt(index));
+                    });
+                }
+        
+                // Inicializar el contador con una fecha predeterminada
+                updateCountdown('2024/04/30 23:59:59');
+        
+                // Evento para cambiar la fecha del contador
+                $('#setDateButton').click(function() {
+                    let userInputDate = $('#dateInput').val();
+                    if (userInputDate) {
+                        let formattedDate = userInputDate.replace('T', ' '); // Convertir fecha ISO a formato requerido
+                        formattedDate = formattedDate + ':59'; // Añadir segundos al final
+                        updateCountdown(formattedDate);
+                    }
+                });
+            });
+        </script>
+        
+    </body>
+</html>

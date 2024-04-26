@@ -1,0 +1,40 @@
+.general {
+    position: absolute;
+    width: 33.39px;
+    height: 41.36px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(7, 7, 7);
+}   
+
+/* 840x600 */
+.hour1-840x600 {
+    top: 453px;
+    left: 48px;
+    font-size: 56px;
+}
+.hour2-840x600 {
+    top: 453px;
+    left: 108px;
+    font-size: 56px;
+}
+.min1-840x600 {
+    top: 456px;
+    left: 185px;
+    font-size: 56px;
+}
+.min2-840x600 {
+    top: 456px;
+    left: 240px;
+    font-size: 56px;
+}
+.seg1-840x600 {
+    top: 456px;
+    left: 317px;
+    font-size: 56px;
+}
+.seg2-840x600 {
+    top: 456px;
+    left: 375px;
+    font-size: 56px;
+}
